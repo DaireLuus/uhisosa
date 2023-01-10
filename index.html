@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Kahe järjendi ühisosa</title>
+        
+    </head>
+<body>
+
+<h1> Leiame kasutaja poolt sisestatud kahe väärtuste järjendi võrdsed väärtused ja nende arvu</h1>
+<p>Palun sisesta komaga eraldatud 1.järjendi väärtused <input type="text" size="50" id="esimene" ></p>
+<p>Palun sisesta komaga eraldatud 2.järjendi väärtused <input type="text" size="50" id="teine" ></p>
+     <button onclick="yhis()"> Vajuta nuppu </button> 
+<p id="tulem"></p>
+<script>
+    function getId(id) { 
+        return document.getElementById(id); 
+    }
+    // Elemendi väärtus
+    function getVal(id) { 
+        return getId(id).value.trim();
+    }
+    function yhis() {
+    var esimene = getVal('esimene').replace(/\s/g, '');
+    var teine = getVal('teine').replace(/\s/g, '');
+    var yks=esimene.split(','); //teeb järjendiks
+    var kaks=teine.split(',');
+        
+      
+    if (esimene == ""){
+        document.getElementById("tulem").innerHTML = "Palun sisesta esimesed väärtused!";
+    }
+    else if (teine == ""){
+        document.getElementById("tulem").innerHTML = "Palun sisesta teised väärtused!";
+
+    }
+    else{   
+        var jarjendid = [yks, kaks]
+         
+        var tulemus = jarjendid.shift().reduce(function(res, v) {
+            if (res.indexOf(v) === -1 && jarjendid.every(function(a) {
+                return a.indexOf(v) !== -1;
+            })) res.push(v);
+            return res;
+        }, []);
+
+       var kokku = tulemus.length;
+       
+
+       if (kokku == 0){
+        document.getElementById("tulem").innerHTML = "Ühiseid ei olnud"
+       } 
+       else {
+        document.getElementById("tulem").innerHTML = "Kokku oli " + kokku + " tükki. Ühised olid: " + tulemus; 
+
+       }
+
+        
+        
+
+            
+   
+
+
+
+          
+        }
+          
+        
+         
+    }
+</script>
+
+</body>
+</html>
